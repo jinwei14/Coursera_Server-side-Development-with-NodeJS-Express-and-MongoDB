@@ -3,3 +3,21 @@ HTTP hypertext Transfer Protocol (HTTP)
 1. a client server communication protocol
 2. allow retrieving interlinked text documents (hypertext) wwww
 3. HTTP Verbs {-HEAD -GET -POST -PUT -DELETE -TRACE -OPTIONS -CONNECT}
+
+
+HTTP request: (page 7 in notes)
+
+1. request Line (Method URL format)
+2. headers  (header  field  name : value)
+3. Blank Line
+4. Body
+
+
+HTTP Response Message: (page 8 in notes)
+1. status line 
+2. Header
+3. Blank line
+4. Body of message
+
+
+
