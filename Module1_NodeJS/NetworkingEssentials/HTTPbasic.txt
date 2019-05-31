@@ -1,0 +1,5 @@
+HTTP hypertext Transfer Protocol (HTTP)
+
+1. a client server communication protocol
+2. allow retrieving interlinked text documents (hypertext) wwww
+3. HTTP Verbs {-HEAD -GET -POST -PUT -DELETE -TRACE -OPTIONS -CONNECT}
