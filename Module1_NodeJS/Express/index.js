@@ -1,13 +1,28 @@
 const express = require('express');
 const http = require('http');
 // to print the
-const morgan = require('morgan')
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
 
 const hostname = 'localhost';
 const port = 3000;
 
 const app = express();
 app.use(morgan('dev'));
+app.use(bodyParser.json());
+//end point and call back function
+app.all('/dishes',(req,res,next)=>{
+    res.statusCode = 200;
+    res.setHeader('Content-Type','text/plain');
+    //it'll continue on to look for additional specifications down below here, which will match this dishes endpoint
+    next();
+
+});
+
+//modification in the all will carried on here
+app.get('/dishes',(req,res,next)=>{
+    res.end('Will send all the dishes to you!');
+});
 
 app.use(express.static(__dirname+'/public'));
 
