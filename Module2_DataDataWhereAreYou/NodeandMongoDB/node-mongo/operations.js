@@ -6,7 +6,7 @@
 // exports.insertDocument = (db, document, collection, callback) => {
 //     const coll = db.collection(collection);
 //     coll.insert(document, (err, result) => {
-//         assert.equal(err, null);
+//         assert.equal(err, null);  
 //         console.log("Inserted " + result.result.n +
 //             " documents into the collection " + collection);
 //         callback(result);
