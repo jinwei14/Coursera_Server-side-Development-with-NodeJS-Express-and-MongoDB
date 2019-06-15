@@ -10,16 +10,14 @@ connect.then((db) => {
 
     console.log('Connected correctly to server');
 
-    var newDish = Dishes({
-        name: 'Uthappizza',
-        description: 'test'
-    });
-
-    newDish.save()
+    Dishes.create({
+            name: 'Uthapizza',
+            description: 'Test'
+        })
         .then((dish) => {
             console.log(dish);
 
-            return Dishes.find({});
+            return Dishes.find({}).exec();
         })
         .then((dishes) => {
             console.log(dishes);
@@ -32,5 +30,28 @@ connect.then((db) => {
         .catch((err) => {
             console.log(err);
         });
+
+    // var newDish = Dishes({
+    //     name: 'Uthappizza',
+    //     description: 'test'
+    // });
+    //
+    // newDish.save()
+    //     .then((dish) => {
+    //         console.log(dish);
+    //
+    //         return Dishes.find({});
+    //     })
+    //     .then((dishes) => {
+    //         console.log(dishes);
+    //
+    //         return Dishes.remove({});
+    //     })
+    //     .then(() => {
+    //         return mongoose.connection.close();
+    //     })
+    //     .catch((err) => {
+    //         console.log(err);
+    //     });
 
 });
