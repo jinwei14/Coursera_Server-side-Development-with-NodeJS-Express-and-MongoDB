@@ -19,13 +19,15 @@ const Dishes = require('./models/dishes');
 // Connection URL
 const url = 'mongodb://localhost:27017/conFusion';
 const connect = mongoose.connect(url, {
-    useMongoClient: true,
-    /* other options */
-  });
+  useMongoClient: true,
+  /* other options */
+});
 
 connect.then((db) => {
-    console.log("Connected correctly to server");
-}, (err) => { console.log(err); });
+  console.log("Connected correctly to server");
+}, (err) => {
+  console.log(err);
+});
 
 var app = express();
 
@@ -37,29 +39,32 @@ app.set('view engine', 'jade');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
-function auth (req, res, next) {
+
+function auth(req, res, next) {
   console.log(req.headers);
   var authHeader = req.headers.authorization;
   if (!authHeader) {
-      var err = new Error('You are not authenticated!');
-      res.setHeader('WWW-Authenticate', 'Basic');
-      err.status = 401;
-      next(err);
-      return;
+    var err = new Error('You are not authenticated!');
+    res.setHeader('WWW-Authenticate', 'Basic');
+    err.status = 401;
+    next(err);
+    return;
   }
 
   var auth = new Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
   var user = auth[0];
   var pass = auth[1];
   if (user == 'admin' && pass == 'password') {
-      next(); // authorized
+    next(); // authorized
   } else {
-      var err = new Error('You are not authenticated!');
-      res.setHeader('WWW-Authenticate', 'Basic');
-      err.status = 401;
-      next(err);
+    var err = new Error('You are not authenticated!');
+    res.setHeader('WWW-Authenticate', 'Basic');
+    err.status = 401;
+    next(err);
   }
 }
 app.use(auth);
@@ -70,9 +75,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
-app.use('/dishes',dishRouter);
-app.use('/promotions',promoRouter);
-app.use('/leaders',leaderRouter);
+app.use('/dishes', dishRouter);
+app.use('/promotions', promoRouter);
+app.use('/leaders', leaderRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
