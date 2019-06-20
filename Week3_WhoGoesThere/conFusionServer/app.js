@@ -47,6 +47,7 @@ app.use(cookieParser());
 function auth(req, res, next) {
   console.log(req.headers);
   var authHeader = req.headers.authorization;
+  // if the authorization not existed
   if (!authHeader) {
     var err = new Error('You are not authenticated!');
     res.setHeader('WWW-Authenticate', 'Basic');
@@ -55,6 +56,7 @@ function auth(req, res, next) {
     return;
   }
 
+  // if the authorization existed and split the buffer into 2
   var auth = new Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
   var user = auth[0];
   var pass = auth[1];
