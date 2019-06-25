@@ -42,7 +42,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
-app.use(cookieParser());
 app.use(cookieParser('12345-67890-09876-54321'));
 
 //  // using cookies video1
@@ -84,13 +83,13 @@ function auth (req, res, next) {
         var err = new Error('You are not authenticated!');
         res.setHeader('WWW-Authenticate', 'Basic');
         err.status = 401;
-        next(err);
-        return;
+
+        return next(err);
     }
     var auth = new Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
     var user = auth[0];
     var pass = auth[1];
-    if (user == 'admin' && pass == 'password') {
+    if (user === 'admin' && pass === 'password') {
         res.cookie('user','admin',{signed: true});
         next(); // authorized
     } else {
@@ -99,12 +98,10 @@ function auth (req, res, next) {
         err.status = 401;
         next(err);
     }
-  }
-  else {
+  }else {
       if (req.signedCookies.user === 'admin') {
           next();
-      }
-      else {
+      }else {
           var err = new Error('You are not authenticated!');
           err.status = 401;
           next(err);
