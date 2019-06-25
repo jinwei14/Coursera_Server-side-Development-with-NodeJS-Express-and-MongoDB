@@ -1,7 +1,10 @@
 var express = require('express');
 var path = require('path');
-
 var logger = require('morgan');
+
+var session = require('express-session');
+var FileStore = require('session-file-store')(session);
+
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
@@ -10,6 +13,7 @@ var users = require('./routes/users');
 var dishRouter = require('./routes/dishRouter');
 var promoRouter = require('./routes/promoRouter');
 var leaderRouter = require('./routes/leaderRouter');
+
 
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
