@@ -1,6 +1,6 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
+
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -43,6 +43,7 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 app.use(cookieParser());
+app.use(cookieParser('12345-67890-09876-54321'));
 
 function auth(req, res, next) {
   console.log(req.headers);
@@ -58,6 +59,7 @@ function auth(req, res, next) {
 
   // if the authorization existed and split the buffer into 2
   var auth = new Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
+// username and password
   var user = auth[0];
   var pass = auth[1];
   if (user == 'admin' && pass == 'password') {
