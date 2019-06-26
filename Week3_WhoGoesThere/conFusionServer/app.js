@@ -23,7 +23,7 @@ const Dishes = require('./models/dishes');
 // Connection URL
 const url = 'mongodb://localhost:27017/conFusion';
 const connect = mongoose.connect(url, {
-  useMongoClient: true,
+  // useMongoClient: true,
   /* other options */
 });
 
@@ -143,7 +143,7 @@ function auth (req, res, next) {
             var err = new Error('You are not authenticated!');
             res.setHeader('WWW-Authenticate', 'Basic');
             err.status = 401;
-            next(err);
+            return next(err);
         }
     }
     else {
@@ -154,7 +154,7 @@ function auth (req, res, next) {
         else {
             var err = new Error('You are not authenticated!');
             err.status = 401;
-            next(err);
+            return next(err);
         }
     }
 }
